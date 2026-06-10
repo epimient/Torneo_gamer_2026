@@ -30,7 +30,7 @@
         <li><a href="#schedule" class="navbar__link">Horario</a></li>
         <li><a href="#format" class="navbar__link">Formato</a></li>
         <li><a href="#prizes" class="navbar__link">Premios</a></li>
-        <li><a href="#register" class="navbar__link navbar__link--cta">Inscribete</a></li>
+        <li><a href="#" class="navbar__link navbar__link--cta" onclick="openForm('individual')">Inscribete</a></li>
       </ul>
     </div>
   </nav>
@@ -64,7 +64,7 @@
           <span>Clash Royale</span><span>Brawlhalla</span><span>Mortal Kombat</span><span>FIFA</span><span>Valorant</span>
         </p>
         <div class="hero__actions">
-          <a href="#register" class="btn btn--primary">Inscribete ahora</a>
+          <a href="#" class="btn btn--primary" onclick="openForm('individual')">Inscribete ahora</a>
           <a href="#schedule" class="btn btn--outline">Ver horario</a>
         </div>
       </div>
@@ -452,7 +452,7 @@
               <li>Mortal Kombat</li>
               <li>FIFA</li>
             </ul>
-            <a href="#" class="btn btn--primary register__btn">Inscribirse</a>
+            <a href="#" class="btn btn--primary register__btn" onclick="openForm('individual')">Inscribirse</a>
           </div>
           <div class="register__card">
             <div class="register__card-header">
@@ -464,7 +464,7 @@
               <li>Comunicación y coordinación</li>
               <li>Juego colaborativo</li>
             </ul>
-            <a href="#" class="btn btn--primary register__btn">Inscribir dupla</a>
+            <a href="#" class="btn btn--primary register__btn" onclick="openForm('dupla')">Inscribir dupla</a>
           </div>
           <div class="register__card register__card--featured">
             <div class="register__card-header">
@@ -476,7 +476,7 @@
               <li>Capitán responsable</li>
               <li>Bloque central del torneo</li>
             </ul>
-            <a href="#" class="btn btn--primary register__btn">Inscribir equipo</a>
+            <a href="#" class="btn btn--primary register__btn" onclick="openForm('equipo')">Inscribir equipo</a>
             <div class="register__badge">BLOQUE CENTRAL</div>
           </div>
           <div class="register__card">
@@ -489,7 +489,7 @@
               <li>Zona de espectadores</li>
               <li>Apoyo a equipos</li>
             </ul>
-            <a href="#" class="btn btn--outline register__btn">Donar ahora</a>
+            <a href="#" class="btn btn--outline register__btn" onclick="openForm('espectador')">Donar ahora</a>
           </div>
         </div>
       </div>
@@ -512,6 +512,67 @@
     </div>
   </footer>
 
+  <!-- Modal pre-registro -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeForm(event)">
+    <div class="modal" id="modalForm">
+      <div class="modal__scanner"></div>
+      <button class="modal__close" onclick="closeForm()" aria-label="Cerrar">&times;</button>
+
+      <div id="formStep1">
+        <div class="modal__header">
+          <span class="section__tag"><span class="section__tag-badge">PRO STUDIATON</span> · PRE-REGISTRO</span>
+          <h2 class="modal__title">Tus datos</h2>
+        </div>
+        <form id="formStep1Fields" onsubmit="event.preventDefault(); goStep2()">
+          <label class="form__field">
+            <span class="form__label">Nombre completo</span>
+            <input type="text" class="form__input" id="fieldNombre" required />
+          </label>
+          <label class="form__field">
+            <span class="form__label">Programa acad&eacute;mico</span>
+            <input type="text" class="form__input" id="fieldPrograma" required />
+          </label>
+          <label class="form__field">
+            <span class="form__label">Correo electr&oacute;nico</span>
+            <input type="email" class="form__input" id="fieldCorreo" required />
+          </label>
+          <label class="form__field">
+            <span class="form__label">Tel&eacute;fono</span>
+            <input type="tel" class="form__input" id="fieldTelefono" required />
+          </label>
+          <button type="submit" class="btn btn--primary modal__btn">Siguiente</button>
+        </form>
+      </div>
+
+      <div id="formStep2" style="display:none">
+        <div class="modal__header">
+          <span class="section__tag"><span class="section__tag-badge">PRO STUDIATON</span> · PARTICIPACI&Oacute;N</span>
+          <h2 class="modal__title" id="step2Title">Tipo de participaci&oacute;n</h2>
+        </div>
+        <form id="formStep2Fields" onsubmit="event.preventDefault(); submitForm()">
+          <div id="formDynamic"></div>
+          <div class="modal__actions">
+            <button type="button" class="btn btn--outline modal__btn" onclick="goStep1()">Atr&aacute;s</button>
+            <button type="submit" class="btn btn--primary modal__btn" id="submitBtn">Generar c&oacute;digo de registro</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="formConfirm" style="display:none">
+        <div class="modal__confirm">
+          <div class="modal__scanner"></div>
+          <span class="modal__confirm-label">TU C&Oacute;DIGO DE REGISTRO</span>
+          <div class="modal__codigo" id="codigoDisplay">TGA-000</div>
+          <div class="modal__glow-line"></div>
+          <p class="modal__confirm-text">Guarda este c&oacute;digo.<br/>Pres&eacute;ntalo el d&iacute;a del evento junto con tu Nequi.</p>
+          <button class="btn btn--outline modal__btn" onclick="closeForm()">Cerrar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/form.js"></script>
 </body>
 </html>
