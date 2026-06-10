@@ -46,13 +46,15 @@ Cargadas desde Google Fonts con `preconnect` y `display=swap`.
 
 - **Scanlines**: Overlay fijo con `repeating-linear-gradient` animado verticalmente, opacidad 2%
 - **Data stream**: Columna binaria en borde derecho con scroll infinito, opacidad 4%
-- **Glitch en hero**: Pseudo-elementos `::before`/`::after` con desplazamiento rojo/cian cada 4s
+- **Glitch real en hero**: 4 capas superpuestas (rojo, cyan, amarillo neón, flash blanco) con animaciones simultáneas de translate ±10px, skew, clip-path slices horizontales. Ciclo base cada 5s con 2 explosiones visibles + bursts aleatorios JS cada 3–8s con 30% de doble burst consecutivo
 - **Scanner bar**: Barra decorativa de 4px con sweep horizontal infinito
 - **Timeline reveal**: `IntersectionObserver` con `data-delay` escalonado (100ms por item)
 - **HUD entry**: Cards aparecen con `hud-scan-in` (scale jitter + clip-path reveal)
 - **Hover glow**: Botones expanden `box-shadow` neón + `scale(0.95)`
 - **Game images**: Filtro `grayscale(1)` → `grayscale(0)` al hover
 - **Parallax grid**: Fondo de rejilla 3D se desplaza con el scroll
+- **Badge PRO STUDIATON pulsante**: En navbar y tags de sección con glow animado
+- **Prize glow**: Card "Espíritu PRO STUDIATON" con glow pulsante cíclico
 - **Reduced motion**: `prefers-reduced-motion: reduce` desactiva toda animación y scanlines
 
 ## Estructura
@@ -78,13 +80,13 @@ torneo-gamer-2026/
 
 ## Secciones del sitio
 
-1. **Navbar** — Fija, backdrop-blur, enlace CTA destacado
-2. **Hero** — Background parallax, logos institucionales, título con glitch, cronología del evento
+1. **Navbar** — Fija, backdrop-blur, solo logo + badge PRO STUDIATON, enlace CTA destacado
+2. **Hero** — Background parallax, logos institucionales, título con glitch real (4 capas RGBY), cronología del evento
 3. **About** — Propósito PRO STUDIATON, capacidad instalada, seguridad
-4. **Games** — 5 tarjetas de juego con imagen, formato y badge
+4. **Games** — 5 tarjetas de juego con imagen, formato y badge PRO STUDIATON en header
 5. **Schedule** — Timeline completa 7:30am–5:30pm con 15 bloques
 6. **Format** — Sistema competitivo por juego con reglas y desempates
-7. **Prizes** — 6 categorías de premiación
+7. **Prizes** — 6 categorías de premiación con card PRO STUDIATON pulsante
 8. **Registration** — 4 planes de aporte ($5K, $10K, $25–30K, voluntario)
 9. **Footer** — Logos institucionales, copyright
 

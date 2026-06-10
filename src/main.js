@@ -96,3 +96,37 @@ console.log('%c TORNEO GAMER AMERICANA 2026 ',
   'background: #be1e2d; color: #ffd3d1; font-weight: bold; padding: 8px 16px; font-size: 16px; font-family: monospace;');
 console.log('%c PRO STUDIATON — Cyber-Industrial Solidary ',
   'background: #171f33; color: #eec200; padding: 6px 12px; font-size: 12px; font-family: monospace;');
+
+// --- Random Glitch Bursts ---
+const glitchEl = document.querySelector('.glitch');
+if (glitchEl) {
+  function triggerGlitchBurst() {
+    glitchEl.classList.add('glitch--burst');
+    setTimeout(() => {
+      glitchEl.classList.remove('glitch--burst');
+    }, 500);
+
+    // 30% chance of a second burst right after
+    if (Math.random() < 0.3) {
+      setTimeout(() => {
+        glitchEl.classList.add('glitch--burst');
+        setTimeout(() => {
+          glitchEl.classList.remove('glitch--burst');
+        }, 350);
+      }, 600);
+    }
+  }
+
+  function scheduleGlitch() {
+    const nextDelay = 3000 + Math.random() * 5000;
+    setTimeout(() => {
+      triggerGlitchBurst();
+      scheduleGlitch();
+    }, nextDelay);
+  }
+
+  scheduleGlitch();
+
+  // Also trigger on first load after 2s
+  setTimeout(triggerGlitchBurst, 2000);
+}
