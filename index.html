@@ -546,13 +546,45 @@
 
       <div id="formStep2" style="display:none">
         <div class="modal__header">
-          <span class="section__tag"><span class="section__tag-badge">PRO STUDIATON</span> · PARTICIPACI&Oacute;N</span>
-          <h2 class="modal__title" id="step2Title">Tipo de participaci&oacute;n</h2>
+          <span class="section__tag"><span class="section__tag-badge">PRO STUDIATON</span> · TIPO</span>
+          <h2 class="modal__title">Elige tu participaci&oacute;n</h2>
         </div>
-        <form id="formStep2Fields" onsubmit="event.preventDefault(); submitForm()">
+        <div class="modal__type-grid">
+          <div class="modal__type-card" onclick="selectType('individual')">
+            <span class="modal__type-icon">1v1</span>
+            <span class="modal__type-name">Individual</span>
+            <span class="modal__type-desc">Clash Royale · MK · FIFA</span>
+          </div>
+          <div class="modal__type-card" onclick="selectType('dupla')">
+            <span class="modal__type-icon">2v2</span>
+            <span class="modal__type-name">Dupla</span>
+            <span class="modal__type-desc">Brawlhalla</span>
+          </div>
+          <div class="modal__type-card" onclick="selectType('equipo')">
+            <span class="modal__type-icon">5v5</span>
+            <span class="modal__type-name">Equipo</span>
+            <span class="modal__type-desc">Valorant</span>
+          </div>
+          <div class="modal__type-card" onclick="selectType('espectador')">
+            <span class="modal__type-icon">&#9733;</span>
+            <span class="modal__type-name">Espectador</span>
+            <span class="modal__type-desc">Apoyo solidario</span>
+          </div>
+        </div>
+        <div class="modal__actions" style="margin-top:var(--space-6)">
+          <button type="button" class="btn btn--outline modal__btn" onclick="goStep1()">Atr&aacute;s</button>
+        </div>
+      </div>
+
+      <div id="formStep3" style="display:none">
+        <div class="modal__header">
+          <span class="section__tag"><span class="section__tag-badge">PRO STUDIATON</span> · PARTICIPACI&Oacute;N</span>
+          <h2 class="modal__title" id="step3Title">Tipo de participaci&oacute;n</h2>
+        </div>
+        <form id="formStep3Fields" onsubmit="event.preventDefault(); submitForm()">
           <div id="formDynamic"></div>
           <div class="modal__actions">
-            <button type="button" class="btn btn--outline modal__btn" onclick="goStep1()">Atr&aacute;s</button>
+            <button type="button" class="btn btn--outline modal__btn" onclick="backToType()">Atr&aacute;s</button>
             <button type="submit" class="btn btn--primary modal__btn" id="submitBtn">Generar c&oacute;digo de registro</button>
           </div>
         </form>

@@ -1815,6 +1815,53 @@ ul {
   margin-top: var(--space-8);
 }
 
+.modal__type-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.modal__type-card {
+  background: var(--color-surface-container-low);
+  border: 1px solid var(--color-outline-variant);
+  padding: var(--space-6);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.modal__type-card:hover {
+  border-color: var(--color-primary-container);
+  background: var(--color-surface-container);
+  box-shadow: 0 0 15px var(--color-primary-glow);
+}
+
+.modal__type-icon {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-primary);
+  display: block;
+  margin-bottom: var(--space-2);
+  letter-spacing: 0.05em;
+}
+
+.modal__type-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-on-surface);
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+.modal__type-desc {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-on-surface-variant);
+}
+
 .modal__btn {
   flex: 1;
 }

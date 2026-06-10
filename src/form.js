@@ -7,7 +7,7 @@ let currentMode = '';
 
 // --- Abrir / cerrar modal ---
 window.openForm = function (mode) {
-  currentMode = mode;
+  currentMode = mode || '';
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   resetForm();
@@ -19,15 +19,24 @@ window.closeForm = function (e) {
   document.body.style.overflow = '';
 };
 
-// --- Navegación pasos ---
+// --- Reset ---
 function resetForm() {
-  document.getElementById('formStep1').style.display = 'block';
-  document.getElementById('formStep2').style.display = 'none';
-  document.getElementById('formConfirm').style.display = 'none';
+  showStep('formStep1');
   document.getElementById('formStep1Fields').reset();
+  document.getElementById('formStep2').style.display = 'none';
+  document.getElementById('formStep3').style.display = 'none';
+  document.getElementById('formConfirm').style.display = 'none';
   document.getElementById('codigoDisplay').textContent = 'TGA-000';
+  currentMode = '';
 }
 
+function showStep(id) {
+  ['formStep1', 'formStep2', 'formStep3', 'formConfirm'].forEach(s => {
+    document.getElementById(s).style.display = s === id ? 'block' : 'none';
+  });
+}
+
+// --- Step 1: Datos personales ---
 function validateStep1() {
   const nombre = document.getElementById('fieldNombre').value.trim();
   const programa = document.getElementById('fieldPrograma').value.trim();
@@ -45,13 +54,28 @@ function validateStep1() {
 }
 
 window.goStep1 = function () {
-  document.getElementById('formStep2').style.display = 'none';
-  document.getElementById('formStep1').style.display = 'block';
+  showStep('formStep1');
 };
 
 window.goStep2 = function () {
   if (!validateStep1()) return;
-  const title = document.getElementById('step2Title');
+  showStep('formStep2');
+};
+
+// --- Step 2: Elegir tipo ---
+window.selectType = function (type) {
+  currentMode = type;
+  showStep('formStep3');
+  renderDynamicFields();
+};
+
+window.backToType = function () {
+  showStep('formStep2');
+};
+
+// --- Step 3: Campos dinámicos ---
+function renderDynamicFields() {
+  const title = document.getElementById('step3Title');
   const container = document.getElementById('formDynamic');
   container.innerHTML = '';
 
@@ -115,13 +139,9 @@ window.goStep2 = function () {
       <p style="color:var(--color-on-surface-variant);font-size:14px;margin-bottom:var(--space-4);">
         Como espectador solidario apoyas la causa PRO STUDIATON. Puedes participar en rifas, retos rel&aacute;mpago y zona de espectadores.
       </p>
-      <input type="hidden" id="fieldJuego" value="Espectador" />
     `;
   }
-
-  document.getElementById('formStep1').style.display = 'none';
-  document.getElementById('formStep2').style.display = 'block';
-};
+}
 
 // --- Envío ---
 window.submitForm = async function () {
@@ -165,16 +185,13 @@ window.submitForm = async function () {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
-    // Con no-cors no podemos leer la respuesta
-    // Generamos código local como fallback
     codigo = 'TGA-' + String(Math.floor(Math.random() * 900) + 100);
   } catch (err) {
     codigo = 'TGA-' + String(Math.floor(Math.random() * 900) + 100);
   }
 
   document.getElementById('codigoDisplay').textContent = codigo;
-  document.getElementById('formStep2').style.display = 'none';
-  document.getElementById('formConfirm').style.display = 'block';
+  showStep('formConfirm');
   btn.textContent = 'Generar código de registro';
   btn.disabled = false;
 };
